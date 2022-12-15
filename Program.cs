@@ -3,8 +3,11 @@
 
 using AdventOfCode2022;
 using AdventOfCode2022.Day1;
+using AdventOfCode2022.Day2;
 
-Day theDay = new Day1();
+Day theDay = new Day2();
 
 theDay.SolvePartA();
 theDay.SolvePartB();
+
+Console.ReadKey();

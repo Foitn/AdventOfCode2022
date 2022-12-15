@@ -18,6 +18,9 @@ public sealed class Day1 : Day
     {
         IEnumerable<Elf> allElves = this.ParsePuzzleInputToElves().OrderByDescending(x => x.TotalCalories);
 
+        Elf theHighest = allElves.MaxBy(x => x.TotalCalories);
+        Elf theLowest = allElves.MinBy(x => x.TotalCalories);
+
         var top3Elves = allElves.Take(3);
 
         Console.WriteLine(top3Elves.Sum(x => x.TotalCalories));
@@ -40,6 +43,27 @@ public sealed class Day1 : Day
         }
 
         yield return new Elf(theStrings);
+    }
+    private List<Elf> ParsePuzzleInputToElves2()
+    {
+        List<Elf> theElves = new();
+        List<string> theStrings = new();
+        foreach (string s in this.PuzzleInput)
+        {
+            if (string.IsNullOrEmpty(s))
+            {
+                theElves.Add(new Elf(theStrings.ToList()));
+                theStrings.Clear();
+            }
+            else
+            {
+                theStrings.Add(s);
+            }
+        }
+
+        theElves.Add(new Elf(theStrings.ToList()));
+
+        return theElves;
     }
 
     private record Elf(IEnumerable<string> Calories)
